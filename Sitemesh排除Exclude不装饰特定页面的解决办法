@@ -1,0 +1,19 @@
+http://www.cnblogs.com/Mainz/archive/2012/08/17/2644502.html
+
+有时候项目中有些文件不需要Sitemesh装饰，例如Error.htm, Error.jsp, OnlineHelp.htm等等。但是用Sitemesh的Exclude不管用，用Printable也不管用：
+
+ <img alt="" src="http://images.cnblogs.com/cnblogs_com/mainz/dfdf3.png" height="64" width="326">
+
+因为Sitemesh装饰的排除路径是虚拟路径而非实际路径。Sitemesh是根据URL来进行装饰Decoration的。最后的解决办法是：如果我们不想让Sitemesh对OnlineHelp.htm进行装饰，那就在这个文件的头加上这个：
+
+ 
+<img alt="" src="http://images.cnblogs.com/cnblogs_com/mainz/3fdsdfs.png" height="65" width="761">
+
+ 然后在decorators.xml里面配置一下：
+ 
+<img alt="" src="http://images.cnblogs.com/cnblogs_com/mainz/3dffddf2.png" height="99" width="463">
+
+最后，确定你的sitemesh.xml配置了meta：
+ <img alt="" src="http://images.cnblogs.com/cnblogs_com/mainz/s3f.png" height="113" width="831" style="width: 824px;">
+
+这样果然不会被装饰了。 参考<a target="_blank" href="http://stackoverflow.com/questions/5227123/is-it-possible-to-define-a-decorator-directly-in-a-jsp-with-sitemesh">StackOverflow</a>.
