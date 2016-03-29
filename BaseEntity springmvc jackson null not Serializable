@@ -6,3 +6,23 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 public class BaseEntity implements Serializable {
 
 }
+
+
+
+
+
+
+------------ spring.xml -----------
+<bean id="jsonView"
+		class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+		<property name="contentType" value="text/html;charset=UTF-8" />
+		<property name="disableCaching" value="true" />
+		<property name="objectMapper">
+			<bean class="org.codehaus.jackson.map.ObjectMapper">
+				<property name="serializationInclusion">
+					<value type="org.codehaus.jackson.map.annotate.JsonSerialize$Inclusion">NON_NULL</value>
+				</property>
+			</bean>
+		</property>
+
+	</bean>
