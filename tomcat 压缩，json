@@ -1,0 +1,6 @@
+<Connector port="8920" protocol="HTTP/1.1" 
+
+compression="on" noCompressionUserAgents="gozilla, traviata" 
+compressableMimeType="text/html,text/xml,text/javascript,text/css,text/plain,application/json,application/x-javascript" 
+
+    connectionTimeout="300000" redirectPort="8543"  URIEncoding="utf-8" useBodyEncodingForURI="true" keepAliveTimeout="30000"/>
