@@ -1,0 +1,31 @@
+在Mybatis动态sql中，<sql /> 片段可以共用
+很多应用场景，sql片段需要做一些静态逻辑，以应对各种select模块
+
+期望如下:
+
+  <sql id="xxx">
+		<if test="isLost == 'a'">AAAA,</if>
+		<if test="isLost == 'b'">BBBB,</if>
+	</sql>
+
+
+引用sql片段语法：<include refid="xxx"></include>， 其中可以通过<property name value />传递参数
+
+但是，传递的参数，都是在解析XML过程中，替换，而非执行Statement时
+
+因此，在执行阶段，mybatis通过ognl在传入的参数中，找不到对应的变量值，无法做到动态化
+
+
+所以可以使用<bind> 做替代方案，引用之前，用bind设置变量名，参数化变量，使得ognl可以找到
+
+	<select id="oneSelect" resultMap="aEntity">
+		<bind name="isLost" value="'a'" />
+		xx
+		<include refid="xxx" />
+		<bind name="isLost" value="'b'" />
+		<include refid="xxx" />
+		
+	</select>
+
+
+
