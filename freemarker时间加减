@@ -1,0 +1,18 @@
+
+freemarker插值，时间类型，会按照默认setting输出字符串
+
+${updateDate}  输出 2017-04-01
+
+?date, ?time, ?datetime 是用来转换字符串为日期的，因此插值里是字符串，转换之后，成为日期类型
+
+foo?datetime("yyyy-MM-dd'T'HH:mm:ssZ") meant to be used when foo is a string (that also have the given format). 
+Then it will convert the String to a java.util.Date. 
+But .now is already java.util.Date, so you don't need to and can't convert it with a pattern. 
+Only strings has to be converted like that. Then both can be ?long-ed, and there you go.
+
+
+
+如果需要做日期加减，先将日期转成long类型，再使用long做加减，再使用number_to_datetime 转换成时间
+
+${(updateDate?long + 10 * 24 * 60 * 60 * 1000)?long?number_to_datetime?string('yyyy-MM-dd')}
+
