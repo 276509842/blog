@@ -17,5 +17,6 @@ var event = document.createEvent("MouseEvents");
         event.initMouseEvent(type,true,true,document.defaultView);  
         ele.dispatchEvent(event);
         
+ dispatchEvent是原始对象，所以如果用jquery，需要用$(ele)[0].dispatchEvent(event);
         
 http://blog.csdn.net/xiongzhengxiang/article/details/10447273
