@@ -1,0 +1,21 @@
+
+
+在content script 中，想触发origin page 中某元素绑定的click 时间
+
+通过 $('ele').click();
+
+
+orgin page 中$('ele')绑定的click handler 并没有触发。如果把 $('ele').click() 放在页面的console中，origin page 中的对应 click handler 会被触发。
+
+解决方案：
+
+$('ele').click();并没有触发真正的click 事件。真实情况是：jQuery 在内部搜索click 便签绑定的函数，然后执行他们。content script 和 origin page 是在不同的环境，他们相互孤立，这样content script 中的jquery 当然找不到对应的handler 了。
+
+所以，我们需要真正触发click 事件。
+
+var event = document.createEvent("MouseEvents");  
+        event.initMouseEvent(type,true,true,document.defaultView);  
+        ele.dispatchEvent(event);
+        
+        
+http://blog.csdn.net/xiongzhengxiang/article/details/10447273
